@@ -45,7 +45,7 @@ const MainLayout: React.FC = () => {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        width={200}
+        width={180}
         theme="dark"
         style={{
           display: "flex",

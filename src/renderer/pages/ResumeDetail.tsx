@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, Descriptions, Button, Space, Divider } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Resume } from "src/main/database/entities/Resume";
 
 const ResumeDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  const [resume, setResume] = useState<Resume | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    window.electronAPI.getResume(parseInt(id)).then((resume) => {
+      setResume(resume);
+    });
+  }, [id]);
+
+  console.log(resume);
 
   // 模拟数据
   const resumeData = {

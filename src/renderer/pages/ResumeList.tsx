@@ -1,42 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Card, Button, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
-
-interface ResumeItem {
-  id: string;
-  name: string;
-  position: string;
-  experience: string;
-  education: string;
-  updateTime: string;
-}
+import type { Resume } from "../../main/database/entities/Resume";
 
 const ResumeList: React.FC = () => {
   const navigate = useNavigate();
+  const [resumes, setResumes] = useState<Resume[]>([]);
 
-  // 模拟数据
-  const data: ResumeItem[] = [
-    {
-      id: "1",
-      name: "张三",
-      position: "高级前端工程师",
-      experience: "5年",
-      education: "本科",
-      updateTime: "2024-03-26",
-    },
-    {
-      id: "2",
-      name: "李四",
-      position: "全栈开发工程师",
-      experience: "3年",
-      education: "硕士",
-      updateTime: "2024-03-25",
-    },
-  ];
+  useEffect(() => {
+    window.electronAPI.getResumes().then((resumes) => {
+      setResumes(resumes);
+    });
+  }, []);
 
-  const columns: ColumnsType<ResumeItem> = [
+  const columns: ColumnsType<Resume> = [
     {
       title: "姓名",
       dataIndex: "name",
@@ -75,6 +54,8 @@ const ResumeList: React.FC = () => {
     },
   ];
 
+  console.log(resumes);
+
   return (
     <div>
       <Space style={{ marginBottom: 16 }}>
@@ -84,7 +65,7 @@ const ResumeList: React.FC = () => {
       </Space>
 
       <Card title="简历列表" extra={<Button type="primary">上传简历</Button>}>
-        <Table columns={columns} dataSource={data} rowKey="id" />
+        <Table columns={columns} dataSource={resumes} rowKey="id" />
       </Card>
     </div>
   );
