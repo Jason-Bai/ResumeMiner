@@ -13,6 +13,7 @@ const App: React.FC = () => {
 
 // 创建根元素
 const container = document.getElementById("root");
+
 if (container) {
   const root = createRoot(container);
   root.render(<App />);
