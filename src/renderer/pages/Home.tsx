@@ -1,17 +1,20 @@
-import React from "react";
-import { Card, Row, Col, Statistic, Input, Space, Button } from "antd";
-import { useNavigate } from "react-router-dom";
-import {
-  FileTextOutlined,
-  TeamOutlined,
-  UserOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { Card, Input, Space, Button } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import ResumeMinerLogo from "@/renderer/assets/images/resume-miner.png";
 
 const { Search } = Input;
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
+  const [version, setVersion] = useState<string>("");
+
+  useEffect(() => {
+    window.electronAPI.getAppVersion().then((version) => {
+      setVersion(version);
+    });
+  }, [window.electronAPI.getAppVersion]);
+
+  console.log(version);
 
   return (
     <div
@@ -24,39 +27,32 @@ const Home: React.FC = () => {
         alignItems: "center",
       }}
     >
+      {/* 版本号显示 */}
+      <div
+        style={{
+          position: "absolute",
+          top: "16px",
+          right: "16px",
+          color: "#666",
+          fontSize: "14px",
+        }}
+      >
+        <p style={{ margin: 0 }}>当前版本：{version}</p>
+      </div>
+
       <div style={{ width: "100%", maxWidth: "800px" }}>
-        {/* 第一部分：统计数据 */}
-        <div style={{ width: "80%", margin: "0 auto 16px" }}>
-          <Row gutter={[16, 16]}>
-            <Col span={8}>
-              <Card onClick={() => navigate("/resumes/list")}>
-                <Statistic
-                  title="简历总数"
-                  value={100}
-                  prefix={<FileTextOutlined />}
-                  style={{ cursor: "pointer" }}
-                />
-              </Card>
-            </Col>
-            <Col span={8}>
-              <Card>
-                <Statistic
-                  title="候选人数量"
-                  value={80}
-                  prefix={<UserOutlined />}
-                />
-              </Card>
-            </Col>
-            <Col span={8}>
-              <Card>
-                <Statistic
-                  title="职位数量"
-                  value={20}
-                  prefix={<TeamOutlined />}
-                />
-              </Card>
-            </Col>
-          </Row>
+        {/* 项目icon */}
+        <div style={{ textAlign: "center", marginBottom: "24px" }}>
+          <img
+            src={ResumeMinerLogo}
+            alt="Resume Miner Logo"
+            style={{
+              width: "200px",
+              height: "auto",
+              borderRadius: "8px",
+              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+            }}
+          />
         </div>
 
         {/* 第二部分：搜索区域 */}
