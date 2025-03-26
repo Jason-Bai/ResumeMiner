@@ -1,27 +1,42 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/locale/zh_CN";
+import MainLayout from "./layouts/MainLayout";
+import { routes, RouteConfig } from "./routes/config";
 import "./assets/styles/global.less";
-import Home from "./pages/Home";
-import ResumeList from "./pages/ResumeList";
-import ResumeDetail from "./pages/ResumeDetail";
-import NotFound from "./pages/NotFound";
 
 const App: React.FC = () => {
+  // 递归渲染路由
+  const renderRoutes = (routes: RouteConfig[]) => {
+    return routes.map((route) => {
+      if (route.children) {
+        return (
+          <Route key={route.path} path={route.path}>
+            {renderRoutes(route.children)}
+          </Route>
+        );
+      }
+      return (
+        <Route
+          key={route.path}
+          path={route.path}
+          element={<route.component />}
+        />
+      );
+    });
+  };
+
   return (
-    <ConfigProvider locale={zhCN}>
-      <Router>
+    <HashRouter>
+      <ConfigProvider locale={zhCN}>
         <div className="app">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/resumes" element={<ResumeList />} />
-            <Route path="/resumes/:id" element={<ResumeDetail />} />
-            <Route path="*" element={<NotFound />} />
+            <Route element={<MainLayout />}>{renderRoutes(routes)}</Route>
           </Routes>
         </div>
-      </Router>
-    </ConfigProvider>
+      </ConfigProvider>
+    </HashRouter>
   );
 };
 

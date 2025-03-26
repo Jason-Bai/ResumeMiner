@@ -43,7 +43,7 @@ const ResumeDetail: React.FC = () => {
       <Space style={{ marginBottom: 16 }}>
         <Button
           icon={<ArrowLeftOutlined />}
-          onClick={() => navigate("/resumes")}
+          onClick={() => navigate("/resumes/list")}
         >
           返回列表
         </Button>
