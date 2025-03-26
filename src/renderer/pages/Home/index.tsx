@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./index.less";
-import useElectron from "../../hooks/useElectron";
+import useElectron from "@/renderer/hooks/useElectron";
 
 const Home: React.FC = () => {
   const { getVersion } = useElectron();
