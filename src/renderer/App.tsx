@@ -1,20 +1,28 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/locale/zh_CN";
 import "./assets/styles/global.less";
 import Home from "./pages/Home";
+import ResumeList from "./pages/ResumeList";
+import ResumeDetail from "./pages/ResumeDetail";
+import NotFound from "./pages/NotFound";
 
 const App: React.FC = () => {
   return (
-    <div className="app">
-      <Home />
-    </div>
+    <ConfigProvider locale={zhCN}>
+      <Router>
+        <div className="app">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/resumes" element={<ResumeList />} />
+            <Route path="/resumes/:id" element={<ResumeDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </Router>
+    </ConfigProvider>
   );
 };
 
-// 创建根元素
-const container = document.getElementById("root");
-
-if (container) {
-  const root = createRoot(container);
-  root.render(<App />);
-}
+export default App;
