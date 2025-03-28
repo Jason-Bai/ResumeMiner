@@ -1,75 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { Table, Card, Button, Space, Tag } from "antd";
+import { List, Card, Button, Space, Tag, Avatar } from "antd";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import type { ColumnsType } from "antd/es/table";
+import { ArrowLeftOutlined, UserOutlined } from "@ant-design/icons";
 import type { Resume } from "../../main/database/entities/Resume";
 
 const ResumeList: React.FC = () => {
   const navigate = useNavigate();
   const [resumes, setResumes] = useState<Resume[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    window.electronAPI.getResumes().then((resumes) => {
-      setResumes(resumes);
-    });
+    setLoading(true);
+    window.electronAPI
+      .getResumes()
+      .then((data) => {
+        setResumes(data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
-  const columns: ColumnsType<Resume> = [
-    {
-      title: "姓名",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "求职意向",
-      dataIndex: "job_intention",
-      key: "job_intention",
-      render: (text) => text || "-",
-    },
-    {
-      title: "最高学历",
-      key: "education",
-      render: (_, record) => {
-        if (!record.education || record.education.length === 0) return "-";
-        const highestEdu = record.education[0];
-        return `${highestEdu.school} | ${highestEdu.major} | ${highestEdu.degree}`;
-      },
-    },
-    {
-      title: "技能",
-      key: "skills",
-      render: (_, record) => {
-        if (!record.skills || record.skills.length === 0) return "-";
-        return (
-          <>
-            {record.skills.map((skill) => (
-              <Tag key={skill}>{skill}</Tag>
-            ))}
-          </>
-        );
-      },
-    },
-    {
-      title: "更新时间",
-      dataIndex: "updatedAt",
-      key: "updatedAt",
-      render: (date) => new Date(date).toLocaleDateString(),
-    },
-    {
-      title: "操作",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button type="link" onClick={() => navigate(`/resumes/${record.id}`)}>
-            查看详情
-          </Button>
-        </Space>
-      ),
-    },
-  ];
-
-  console.log(resumes);
+  const getHighestEducation = (education: Resume["education"]) => {
+    if (!education || education.length === 0) return "-";
+    const highestEdu = education[0];
+    return `${highestEdu.school} | ${highestEdu.major} | ${highestEdu.degree}`;
+  };
 
   return (
     <div>
@@ -79,8 +35,96 @@ const ResumeList: React.FC = () => {
         </Button>
       </Space>
 
-      <Card title="简历列表" extra={<Button type="primary">上传简历</Button>}>
-        <Table columns={columns} dataSource={resumes} rowKey="id" />
+      <Card
+        title="简历列表"
+        extra={<Button type="primary">上传简历</Button>}
+        bodyStyle={{ padding: "24px 0" }}
+      >
+        <List
+          grid={{
+            gutter: 16,
+            xs: 1,
+            sm: 2,
+            md: 3,
+            lg: 3,
+            xl: 4,
+            xxl: 4,
+          }}
+          dataSource={resumes}
+          loading={loading}
+          renderItem={(resume) => (
+            <List.Item>
+              <Card
+                hoverable
+                style={{ margin: "0 12px" }}
+                onClick={() => navigate(`/resumes/${resume.id}`)}
+              >
+                <div style={{ textAlign: "center", marginBottom: 16 }}>
+                  <Avatar
+                    size={64}
+                    icon={<UserOutlined />}
+                    style={{ backgroundColor: "#1890ff" }}
+                  />
+                  <h3 style={{ marginTop: 8, marginBottom: 4 }}>
+                    {resume.name}
+                  </h3>
+                  <div style={{ color: "#666" }}>
+                    {resume.job_intention || "-"}
+                  </div>
+                </div>
+
+                <div style={{ marginBottom: 12 }}>
+                  <div style={{ fontWeight: 500, marginBottom: 4 }}>
+                    最高学历
+                  </div>
+                  <div style={{ color: "#666", fontSize: "13px" }}>
+                    {getHighestEducation(resume.education)}
+                  </div>
+                </div>
+
+                {resume.skills && resume.skills.length > 0 && (
+                  <div>
+                    <div style={{ fontWeight: 500, marginBottom: 4 }}>
+                      技能标签
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "4px",
+                        fontSize: "12px",
+                      }}
+                    >
+                      {resume.skills.slice(0, 3).map((skill) => (
+                        <Tag key={skill} style={{ margin: 0 }}>
+                          {skill}
+                        </Tag>
+                      ))}
+                      {resume.skills.length > 3 && (
+                        <Tag style={{ margin: 0 }}>
+                          +{resume.skills.length - 3}
+                        </Tag>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                <div
+                  style={{
+                    marginTop: 16,
+                    padding: "8px 0",
+                    borderTop: "1px solid #f0f0f0",
+                    fontSize: "12px",
+                    color: "#999",
+                    textAlign: "right",
+                  }}
+                >
+                  更新于 {new Date(resume.updatedAt).toLocaleDateString()}
+                </div>
+              </Card>
+            </List.Item>
+          )}
+        />
       </Card>
     </div>
   );
