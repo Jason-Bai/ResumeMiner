@@ -19,6 +19,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.invoke(IPCMainChannels.UPDATE_RESUME, id, resume),
   deleteResume: (id: number) =>
     ipcRenderer.invoke(IPCMainChannels.DELETE_RESUME, id),
+  refreshSkills: () => ipcRenderer.invoke(IPCMainChannels.REFRESH_SKILLS),
 
   // 渲染进程主动发送
   sendLog: (message: string) =>

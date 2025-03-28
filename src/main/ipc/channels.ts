@@ -6,6 +6,7 @@ export enum IPCMainChannels {
   SAVE_RESUME = "save-resume",
   UPDATE_RESUME = "update-resume",
   DELETE_RESUME = "delete-resume",
+  REFRESH_SKILLS = "refresh-skills",
   // 其他通道...
 }
 

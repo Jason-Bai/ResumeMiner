@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Card, Button, Space } from "antd";
+import { Table, Card, Button, Space, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
@@ -22,24 +22,39 @@ const ResumeList: React.FC = () => {
       key: "name",
     },
     {
-      title: "职位",
-      dataIndex: "position",
-      key: "position",
+      title: "求职意向",
+      dataIndex: "job_intention",
+      key: "job_intention",
+      render: (text) => text || "-",
     },
     {
-      title: "工作经验",
-      dataIndex: "experience",
-      key: "experience",
-    },
-    {
-      title: "学历",
-      dataIndex: "education",
+      title: "最高学历",
       key: "education",
+      render: (_, record) => {
+        if (!record.education || record.education.length === 0) return "-";
+        const highestEdu = record.education[0];
+        return `${highestEdu.school} | ${highestEdu.major} | ${highestEdu.degree}`;
+      },
+    },
+    {
+      title: "技能",
+      key: "skills",
+      render: (_, record) => {
+        if (!record.skills || record.skills.length === 0) return "-";
+        return (
+          <>
+            {record.skills.map((skill) => (
+              <Tag key={skill}>{skill}</Tag>
+            ))}
+          </>
+        );
+      },
     },
     {
       title: "更新时间",
-      dataIndex: "updateTime",
-      key: "updateTime",
+      dataIndex: "updatedAt",
+      key: "updatedAt",
+      render: (date) => new Date(date).toLocaleDateString(),
     },
     {
       title: "操作",
