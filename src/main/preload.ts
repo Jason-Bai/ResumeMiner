@@ -2,7 +2,7 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 // src/main/preload.ts
 import { contextBridge, ipcRenderer } from "electron";
-import { IPCMainChannels, IPCRendererChannels } from "./ipc/channels";
+import { IPCMainChannels, IPCRendererChannels } from "./ipc/types";
 import type { Resume } from "./database/entities/Resume";
 
 // 添加日志帮助调试
@@ -20,6 +20,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
   deleteResume: (id: number) =>
     ipcRenderer.invoke(IPCMainChannels.DELETE_RESUME, id),
   refreshSkills: () => ipcRenderer.invoke(IPCMainChannels.REFRESH_SKILLS),
+  getResumesByParams: (params: Partial<Resume>) =>
+    ipcRenderer.invoke(IPCMainChannels.GET_RESUMES_BY_PARAMS, params),
 
   // 渲染进程主动发送
   sendLog: (message: string) =>

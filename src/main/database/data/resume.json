@@ -112,5 +112,543 @@
     "job_intention": "土木/土建工程师",
     "intended_city": "某市",
     "certificates": ["一级建造师", "监理工程师", "中级工程师"]
+  },
+  {
+    "name": "赵某某",
+    "gender": "男",
+    "birth_date": "1995/XX/XX",
+    "education": [
+      {
+        "school": "某理工大学",
+        "major": "软件工程",
+        "degree": "本科",
+        "period": "2014-2018"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某科技有限公司",
+        "position": "前端开发工程师",
+        "period": "2021.03-至今",
+        "description": "1.负责公司核心产品的前端开发\n2.参与技术方案设计和评审\n3.负责前端架构优化和性能提升"
+      },
+      {
+        "company": "某网络科技公司",
+        "position": "Web开发工程师",
+        "period": "2018.07-2021.02",
+        "description": "1.负责企业官网开发维护\n2.开发各类营销活动页面\n3.解决各类浏览器兼容性问题"
+      }
+    ],
+    "skills": ["React", "Vue", "TypeScript", "Webpack"],
+    "self_evaluation": "拥有4年前端开发经验，熟悉现代前端框架和工具，对性能优化有深入研究。具有良好的团队协作能力和问题解决能力。",
+    "job_intention": "高级前端开发工程师",
+    "intended_city": "某市",
+    "certificates": ["计算机技术中级职称"]
+  },
+  {
+    "name": "孙某某",
+    "gender": "女",
+    "birth_date": "1993/XX/XX",
+    "education": [
+      {
+        "school": "某师范大学",
+        "major": "人力资源管理",
+        "degree": "本科",
+        "period": "2012-2016"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某集团公司",
+        "position": "人力资源经理",
+        "period": "2020.06-至今",
+        "description": "1.负责公司整体人力资源规划\n2.建立完善的招聘、培训体系\n3.优化绩效考核制度"
+      }
+    ],
+    "skills": ["招聘", "培训", "绩效考核", "员工关系"],
+    "self_evaluation": "具有7年人力资源管理经验，擅长团队建设和企业文化建设，有丰富的招聘面试经验。",
+    "job_intention": "人力资源总监",
+    "intended_city": "某市",
+    "certificates": ["人力资源管理师二级"]
+  },
+  {
+    "name": "周某某",
+    "gender": "女",
+    "birth_date": "1994/XX/XX",
+    "education": [
+      {
+        "school": "某艺术学院",
+        "major": "视觉传达设计",
+        "degree": "本科",
+        "period": "2013-2017"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某互联网公司",
+        "position": "UI设计师",
+        "period": "2020.03-至今",
+        "description": "1.负责公司产品界面视觉设计\n2.制定设计规范和组件库\n3.参与产品体验优化和品牌设计"
+      },
+      {
+        "company": "某设计工作室",
+        "position": "平面设计师",
+        "period": "2017.07-2020.02",
+        "description": "1.负责品牌视觉设计\n2.设计营销物料和宣传材料\n3.参与客户需求沟通和方案提案"
+      }
+    ],
+    "skills": ["Figma", "Sketch", "PhotoShop", "Illustrator"],
+    "self_evaluation": "拥有6年设计经验，对用户体验和交互设计有深入理解，善于把握设计趋势和用户需求。",
+    "job_intention": "高级UI设计师",
+    "intended_city": "某市",
+    "certificates": ["平面设计师证书"]
+  },
+  {
+    "name": "吴某某",
+    "gender": "男",
+    "birth_date": "1990/XX/XX",
+    "education": [
+      {
+        "school": "某财经大学",
+        "major": "市场营销",
+        "degree": "硕士",
+        "period": "2012-2015"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某电商平台",
+        "position": "产品经理",
+        "period": "2019.04-至今",
+        "description": "1.负责电商核心业务产品规划和迭代\n2.主导用户研究和需求分析\n3.推动产品从0到1的建设"
+      },
+      {
+        "company": "某科技公司",
+        "position": "产品运营",
+        "period": "2015.07-2019.03",
+        "description": "1.负责产品运营策略制定和执行\n2.数据分析和用户增长\n3.产品活动策划和推广"
+      }
+    ],
+    "skills": ["产品规划", "数据分析", "用户研究", "项目管理"],
+    "self_evaluation": "8年产品经验，擅长用户需求分析和产品规划，有丰富的0到1产品经验。",
+    "job_intention": "高级产品经理",
+    "intended_city": "某市",
+    "certificates": ["PMP项目管理认证"]
+  },
+  {
+    "name": "郑某某",
+    "gender": "男",
+    "birth_date": "1992/XX/XX",
+    "education": [
+      {
+        "school": "某计算机学院",
+        "major": "计算机科学与技术",
+        "degree": "本科",
+        "period": "2011-2015"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某互联网公司",
+        "position": "后端开发工程师",
+        "period": "2018.06-至今",
+        "description": "1.负责核心服务架构设计和开发\n2.优化系统性能和稳定性\n3.参与技术方案评审和技术选型"
+      },
+      {
+        "company": "某软件公司",
+        "position": "Java开发工程师",
+        "period": "2015.07-2018.05",
+        "description": "1.开发和维护企业级应用\n2.数据库设计和优化\n3.解决系统运行问题"
+      }
+    ],
+    "skills": ["Java", "Spring Boot", "MySQL", "Redis", "微服务"],
+    "self_evaluation": "8年后端开发经验，精通Java企业级开发，有丰富的高并发系统开发经验。",
+    "job_intention": "技术经理",
+    "intended_city": "某市",
+    "certificates": ["高级软件工程师"]
+  },
+  {
+    "name": "陈某某",
+    "gender": "女",
+    "birth_date": "1996/XX/XX",
+    "education": [
+      {
+        "school": "某传媒大学",
+        "major": "新闻传播",
+        "degree": "本科",
+        "period": "2015-2019"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某互联网公司",
+        "position": "内容运营",
+        "period": "2021.03-至今",
+        "description": "1.负责平台内容策划和生产\n2.管理内容创作者社区\n3.制定内容运营策略"
+      },
+      {
+        "company": "某媒体公司",
+        "position": "编辑",
+        "period": "2019.07-2021.02",
+        "description": "1.负责日常文章编辑和发布\n2.策划专题内容\n3.维护作者关系"
+      }
+    ],
+    "skills": ["内容策划", "社区运营", "数据分析", "新媒体运营"],
+    "self_evaluation": "4年内容运营经验，擅长内容策划和社区运营，对用户增长有独特见解。",
+    "job_intention": "内容运营经理",
+    "intended_city": "某市",
+    "certificates": ["新媒体运营师"]
+  },
+  {
+    "name": "杨某某",
+    "gender": "男",
+    "birth_date": "1989/XX/XX",
+    "education": [
+      {
+        "school": "某工业大学",
+        "major": "机械工程",
+        "degree": "本科",
+        "period": "2008-2012"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某制造企业",
+        "position": "生产经理",
+        "period": "2017.04-至今",
+        "description": "1.负责生产线管理和优化\n2.制定生产计划和质量标准\n3.推进精益生产管理"
+      },
+      {
+        "company": "某机械公司",
+        "position": "工艺工程师",
+        "period": "2012.07-2017.03",
+        "description": "1.工艺流程设计和优化\n2.生产技术问题解决\n3.新产品试制管理"
+      }
+    ],
+    "skills": ["生产管理", "质量控制", "精益生产", "工艺设计"],
+    "self_evaluation": "11年制造业经验，精通生产管理和工艺优化，有丰富的精益生产实践经验。",
+    "job_intention": "生产总监",
+    "intended_city": "某市",
+    "certificates": ["质量管理体系内审员"]
+  },
+  {
+    "name": "刘某某",
+    "gender": "女",
+    "birth_date": "1993/XX/XX",
+    "education": [
+      {
+        "school": "某经济学院",
+        "major": "金融学",
+        "degree": "硕士",
+        "period": "2015-2018"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某投资公司",
+        "position": "投资分析师",
+        "period": "2020.05-至今",
+        "description": "1.负责项目投资分析和尽职调查\n2.撰写投资分析报告\n3.参与投资决策"
+      },
+      {
+        "company": "某证券公司",
+        "position": "研究员",
+        "period": "2018.07-2020.04",
+        "description": "1.行业研究和分析\n2.撰写研究报告\n3.为投资决策提供建议"
+      }
+    ],
+    "skills": ["财务分析", "投资分析", "风险控制", "行业研究"],
+    "self_evaluation": "5年金融行业经验，擅长投资分析和风险评估，具有扎实的金融专业知识。",
+    "job_intention": "高级投资经理",
+    "intended_city": "某市",
+    "certificates": ["CFA二级", "证券从业资格"]
+  },
+  {
+    "name": "黄某某",
+    "gender": "男",
+    "birth_date": "1991/XX/XX",
+    "education": [
+      {
+        "school": "某科技大学",
+        "major": "数据科学",
+        "degree": "硕士",
+        "period": "2013-2016"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某互联网公司",
+        "position": "数据分析师",
+        "period": "2019.03-至今",
+        "description": "1.负责用户行为数据分析\n2.建立数据分析模型\n3.提供数据驱动的决策建议"
+      },
+      {
+        "company": "某咨询公司",
+        "position": "商业分析师",
+        "period": "2016.07-2019.02",
+        "description": "1.市场调研和分析\n2.竞品分析\n3.商业策略建议"
+      }
+    ],
+    "skills": ["Python", "R", "SQL", "机器学习", "数据可视化"],
+    "self_evaluation": "7年数据分析经验，精通数据挖掘和机器学习，擅长用数据驱动业务决策。",
+    "job_intention": "数据分析经理",
+    "intended_city": "某市",
+    "certificates": ["数据分析师认证"]
+  },
+  {
+    "name": "徐某某",
+    "gender": "女",
+    "birth_date": "1995/XX/XX",
+    "education": [
+      {
+        "school": "某外国语大学",
+        "major": "英语",
+        "degree": "本科",
+        "period": "2014-2018"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某跨国公司",
+        "position": "海外市场经理",
+        "period": "2020.08-至今",
+        "description": "1.负责海外市场开发和维护\n2.制定市场营销策略\n3.管理海外销售团队"
+      },
+      {
+        "company": "某外贸公司",
+        "position": "外贸业务员",
+        "period": "2018.07-2020.07",
+        "description": "1.开发海外客户\n2.跟进订单执行\n3.处理客户关系"
+      }
+    ],
+    "skills": ["市场开发", "跨文化沟通", "商务谈判", "团队管理"],
+    "self_evaluation": "5年外贸经验，精通国际贸易实务，有丰富的跨文化沟通经验。",
+    "job_intention": "海外业务总监",
+    "intended_city": "某市",
+    "certificates": ["商务英语高级", "国际贸易师"]
+  },
+  {
+    "name": "朱某某",
+    "gender": "男",
+    "birth_date": "1988/XX/XX",
+    "education": [
+      {
+        "school": "某建筑大学",
+        "major": "建筑设计",
+        "degree": "本科",
+        "period": "2007-2011"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某建筑设计院",
+        "position": "建筑师",
+        "period": "2015.04-至今",
+        "description": "1.负责建筑方案设计\n2.项目施工图设计\n3.现场技术指导"
+      },
+      {
+        "company": "某设计公司",
+        "position": "助理建筑师",
+        "period": "2011.07-2015.03",
+        "description": "1.参与建筑设计\n2.制作设计图纸\n3.协助项目管理"
+      }
+    ],
+    "skills": ["AutoCAD", "Revit", "SketchUp", "建筑设计"],
+    "self_evaluation": "12年建筑设计经验，擅长商业建筑和住宅设计，有多个大型项目经验。",
+    "job_intention": "高级建筑师",
+    "intended_city": "某市",
+    "certificates": ["注册建筑师"]
+  },
+  {
+    "name": "韩某某",
+    "gender": "女",
+    "birth_date": "1994/XX/XX",
+    "education": [
+      {
+        "school": "某医科大学",
+        "major": "临床医学",
+        "degree": "本科",
+        "period": "2013-2018"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某医院",
+        "position": "内科医生",
+        "period": "2021.03-至今",
+        "description": "1.负责门诊诊疗工作\n2.参与疑难病例讨论\n3.开展健康教育"
+      },
+      {
+        "company": "某社区医院",
+        "position": "全科医生",
+        "period": "2018.07-2021.02",
+        "description": "1.基础医疗服务\n2.慢性病管理\n3.健康咨询"
+      }
+    ],
+    "skills": ["内科诊疗", "医患沟通", "临床研究"],
+    "self_evaluation": "5年临床经验，具有扎实的医学理论基础和临床实践能力。",
+    "job_intention": "主治医师",
+    "intended_city": "某市",
+    "certificates": ["执业医师资格证"]
+  },
+  {
+    "name": "马某某",
+    "gender": "男",
+    "birth_date": "1992/XX/XX",
+    "education": [
+      {
+        "school": "某体育学院",
+        "major": "体育教育",
+        "degree": "本科",
+        "period": "2011-2015"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某健身连锁",
+        "position": "健身教练",
+        "period": "2018.05-至今",
+        "description": "1.个人训练课程指导\n2.制定训练计划\n3.会员健康管理"
+      },
+      {
+        "company": "某运动中心",
+        "position": "体育教练",
+        "period": "2015.07-2018.04",
+        "description": "1.青少年体育培训\n2.团体课程教学\n3.体能训练指导"
+      }
+    ],
+    "skills": ["体能训练", "运动康复", "营养指导"],
+    "self_evaluation": "8年健身教练经验，擅长体能训练和运动康复，注重科学训练方法。",
+    "job_intention": "高级健身教练",
+    "intended_city": "某市",
+    "certificates": ["健身教练证", "营养师证书"]
+  },
+  {
+    "name": "邓某某",
+    "gender": "女",
+    "birth_date": "1997/XX/XX",
+    "education": [
+      {
+        "school": "某音乐学院",
+        "major": "音乐教育",
+        "degree": "本科",
+        "period": "2016-2020"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某艺术培训中心",
+        "position": "钢琴教师",
+        "period": "2021.09-至今",
+        "description": "1.钢琴一对一教学\n2.课程内容设计\n3.学生考级辅导"
+      },
+      {
+        "company": "某音乐工作室",
+        "position": "音乐教师",
+        "period": "2020.07-2021.08",
+        "description": "1.基础乐理教学\n2.器乐培训\n3.音乐素养培养"
+      }
+    ],
+    "skills": ["钢琴演奏", "乐理教学", "考级辅导"],
+    "self_evaluation": "3年音乐教育经验，具有扎实的音乐理论基础和教学经验。",
+    "job_intention": "音乐教育总监",
+    "intended_city": "某市",
+    "certificates": ["钢琴十级", "教师资格证"]
+  },
+  {
+    "name": "曾某某",
+    "gender": "男",
+    "birth_date": "1990/XX/XX",
+    "education": [
+      {
+        "school": "某环境学院",
+        "major": "环境工程",
+        "degree": "硕士",
+        "period": "2012-2015"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某环保科技公司",
+        "position": "环保工程师",
+        "period": "2018.03-至今",
+        "description": "1.环保项目设计和实施\n2.污染治理方案制定\n3.环评报告编制"
+      },
+      {
+        "company": "某咨询机构",
+        "position": "环境评估师",
+        "period": "2015.07-2018.02",
+        "description": "1.环境影响评价\n2.环境监测分析\n3.技术咨询服务"
+      }
+    ],
+    "skills": ["环境评估", "污染治理", "项目管理"],
+    "self_evaluation": "8年环保行业经验，精通环境影响评价和污染治理技术。",
+    "job_intention": "环保技术总监",
+    "intended_city": "某市",
+    "certificates": ["环境影响评价工程师", "注册环保工程师"]
+  },
+  {
+    "name": "谢某某",
+    "gender": "女",
+    "birth_date": "1996/XX/XX",
+    "education": [
+      {
+        "school": "某旅游学院",
+        "major": "酒店管理",
+        "degree": "本科",
+        "period": "2015-2019"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某五星级酒店",
+        "position": "客房部经理",
+        "period": "2022.01-至今",
+        "description": "1.客房部门管理\n2.服务质量监督\n3.员工培训管理"
+      },
+      {
+        "company": "某度假酒店",
+        "position": "前台主管",
+        "period": "2019.07-2021.12",
+        "description": "1.前台日常运营\n2.客户关系维护\n3.团队管理协调"
+      }
+    ],
+    "skills": ["酒店管理", "客户服务", "团队管理"],
+    "self_evaluation": "4年酒店管理经验，擅长服务质量管理和团队建设。",
+    "job_intention": "酒店运营总监",
+    "intended_city": "某市",
+    "certificates": ["酒店管理师"]
+  },
+  {
+    "name": "彭某某",
+    "gender": "男",
+    "birth_date": "1993/XX/XX",
+    "education": [
+      {
+        "school": "某电影学院",
+        "major": "影视制作",
+        "degree": "本科",
+        "period": "2012-2016"
+      }
+    ],
+    "experience": [
+      {
+        "company": "某视频平台",
+        "position": "视频制作主管",
+        "period": "2019.06-至今",
+        "description": "1.短视频内容策划\n2.视频拍摄制作\n3.后期剪辑管理"
+      },
+      {
+        "company": "某传媒公司",
+        "position": "视频剪辑师",
+        "period": "2016.07-2019.05",
+        "description": "1.视频剪辑和特效\n2.音频处理\n3.字幕制作"
+      }
+    ],
+    "skills": ["视频剪辑", "影视制作", "内容策划", "后期制作"],
+    "self_evaluation": "7年视频制作经验，精通各类视频制作软件，有丰富的短视频制作经验。",
+    "job_intention": "视频制作总监",
+    "intended_city": "某市",
+    "certificates": ["影视制作师"]
   }
 ]

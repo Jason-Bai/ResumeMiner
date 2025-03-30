@@ -1,21 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Card, Descriptions, Button, Space, Divider, Tag, Empty } from "antd";
+import {
+  Card,
+  Descriptions,
+  Button,
+  Space,
+  Divider,
+  Tag,
+  Empty,
+  Alert,
+} from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Resume } from "src/main/database/entities/Resume";
+import { Resume } from "../../types/resume";
+import { Stage, useHomeContext } from "../Home/HomeContext";
+import { ipcInvoke } from "../../utils/ipc";
 
 const ResumeDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const { resumeId, setStage } = useHomeContext();
+
+  console.log(resumeId);
+
   const [resume, setResume] = useState<Resume | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  const handleGetResumeById = async (id: number): Promise<Resume> => {
+    try {
+      const resumeData = await ipcInvoke<Resume>("getResume", id.toString(), {
+        onError: (error: Error) => {
+          console.error("获取简历详情失败:", error);
+          setError(error);
+          throw error;
+        },
+      });
+      return resumeData;
+    } catch (error) {
+      console.error("获取简历详情失败:", error);
+      throw error;
+    }
+  };
 
   useEffect(() => {
-    if (!id) return;
+    if (!resumeId) return;
 
     setLoading(true);
-    window.electronAPI
-      .getResume(parseInt(id))
+
+    handleGetResumeById(resumeId)
       .then((data) => {
         setResume(data);
       })
@@ -25,7 +54,7 @@ const ResumeDetail: React.FC = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [id]);
+  }, [resumeId]);
 
   if (loading) {
     return <div>加载中...</div>;
@@ -42,11 +71,19 @@ const ResumeDetail: React.FC = () => {
       <Space style={{ marginBottom: 16 }}>
         <Button
           icon={<ArrowLeftOutlined />}
-          onClick={() => navigate("/resumes/list")}
+          onClick={() => setStage(Stage.Show_Result)}
         >
-          返回列表
+          返回
         </Button>
       </Space>
+
+      {error && (
+        <Alert
+          message="获取简历详情失败"
+          description={error.message}
+          type="error"
+        />
+      )}
 
       {/* 基本信息 */}
       <Card title="基本信息" style={{ marginBottom: 16 }}>

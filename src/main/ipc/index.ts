@@ -1,41 +1,26 @@
 import { app, ipcMain } from "electron";
-import { IPCMainChannels, IPCRendererChannels } from "./channels";
-import { getRepository } from "../database";
+import { IPCMainChannels, IPCRendererChannels } from "./types";
+import { wrapIpcHandler } from "./utils/response";
+import {
+  handleGetResumes,
+  handleGetResume,
+  handleGetResumesByParams,
+} from "./handlers/resume";
 
 // 处理获取版本请求
-const handleGetAppVersion = async () => {
-  try {
-    return await app.getVersion();
-  } catch (error) {
-    console.error("Version check failed:", error);
-    throw new Error("VERSION_CHECK_FAILED");
-  }
+const getAppVersion = async () => {
+  return await app.getVersion();
 };
 
-// 获取所有简历
-const handleGetResumes = async () => {
-  try {
-    const { Resume: resumeRepository } = getRepository();
-    return await resumeRepository.find();
-  } catch (error) {
-    console.error("Failed to get resumes:", error);
-    throw new Error("FAILED_TO_GET_RESUMES");
-  }
-};
-
-// 获取单个简历
-const handleGetResume = async (_: any, id: string) => {
-  try {
-    const { Resume: resumeRepository } = getRepository();
-    return await resumeRepository.findOneBy({ id: parseInt(id) });
-  } catch (error) {
-    console.error("Failed to get resume:", error);
-    throw new Error("FAILED_TO_GET_RESUME");
-  }
-};
+const handleGetAppVersion = wrapIpcHandler(
+  getAppVersion,
+  "获取版本成功",
+  "获取版本失败",
+  ""
+);
 
 // 处理日志事件
-const handleLogEvent = (_: any, message: string) => {
+const handleLogEvent = (_: any, message: string): void => {
   console.log("[Renderer Log]:", message);
 };
 
@@ -47,6 +32,10 @@ export function registerIPC() {
   // 简历相关
   ipcMain.handle(IPCMainChannels.GET_RESUMES, handleGetResumes);
   ipcMain.handle(IPCMainChannels.GET_RESUME, handleGetResume);
+  ipcMain.handle(
+    IPCMainChannels.GET_RESUMES_BY_PARAMS,
+    handleGetResumesByParams
+  );
 
   // 日志相关
   ipcMain.on(IPCRendererChannels.LOG_EVENT, handleLogEvent);

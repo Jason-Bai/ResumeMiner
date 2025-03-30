@@ -1,7 +1,7 @@
 import { HomeOutlined, FileOutlined } from "@ant-design/icons";
 import Home from "../pages/Home";
 import ResumeList from "../pages/ResumeList";
-import ResumeDetail from "../pages/ResumeDetail";
+import ResumeDetail from "../pages/Resume/Detail";
 import NotFound from "../pages/NotFound";
 
 export interface RouteConfig {
@@ -20,25 +20,25 @@ export const routes: RouteConfig[] = [
     icon: HomeOutlined,
     component: Home,
   },
-  {
-    path: "/resumes",
-    name: "简历管理",
-    icon: FileOutlined,
-    component: ResumeList,
-    children: [
-      {
-        path: "/resumes/list",
-        name: "简历列表",
-        component: ResumeList,
-      },
-      {
-        path: "/resumes/:id",
-        name: "简历详情",
-        component: ResumeDetail,
-        hidden: true,
-      },
-    ],
-  },
+  // {
+  //   path: "/resumes",
+  //   name: "简历管理",
+  //   icon: FileOutlined,
+  //   component: ResumeList,
+  //   children: [
+  //     {
+  //       path: "/resumes/list",
+  //       name: "简历列表",
+  //       component: ResumeList,
+  //     },
+  //     {
+  //       path: "/resumes/:id",
+  //       name: "简历详情",
+  //       component: ResumeDetail,
+  //       hidden: true,
+  //     },
+  //   ],
+  // },
   {
     path: "*",
     name: "404",

@@ -29,8 +29,10 @@ const createWindow = (): void => {
     mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   }
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (process.env.NODE_ENV === "development") {
+    // Open the DevTools.
+    mainWindow.webContents.openDevTools();
+  }
 };
 
 // 清理数据的函数
