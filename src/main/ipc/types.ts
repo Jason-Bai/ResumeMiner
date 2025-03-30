@@ -4,6 +4,7 @@ export enum IPCMainChannels {
   GET_RESUMES = "get-resumes",
   GET_RESUME = "get-resume",
   GET_RESUMES_BY_PARAMS = "get-resumes-by-params",
+  GET_RESUMES_BY_PARAMS_WITH_PAGINATION = "get-resumes-by-params-with-pagination",
   SAVE_RESUME = "save-resume",
   UPDATE_RESUME = "update-resume",
   DELETE_RESUME = "delete-resume",
@@ -52,4 +53,9 @@ export interface IpcQueryParams {
   keyword?: string;
   filters?: Record<string, any>;
   sort?: IpcSortParams;
+}
+
+export interface PageParams<T> extends IpcPageParams {
+  params: T;
+  sort: IpcSortParams;
 }

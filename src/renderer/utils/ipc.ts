@@ -1,6 +1,5 @@
 import { IpcResponse } from "../../main/ipc/types";
-
-interface IpcCallOptions {
+export interface IpcCallOptions {
   timeout?: number;
   onError?: (error: Error) => void;
 }

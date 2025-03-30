@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { List, Card, Tag, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { Resume } from "../../types/resume";
 import { SearchParams, Stage, useHomeContext } from "./HomeContext";
-import { ipcInvoke } from "../../utils/ipc";
+import { handleGetResumesByParams } from "../../services/resume";
 
 const HeaderContent: React.FC = () => {
   const [resumes, setResumes] = useState<Resume[]>([]);
@@ -11,8 +11,8 @@ const HeaderContent: React.FC = () => {
   const { setResumeId, setStage, searchParams } = useHomeContext();
   const [error, setError] = useState<Error | null>(null);
 
-  const handleGetResumesByParams = async (params: SearchParams) => {
-    const resumes = await ipcInvoke<Resume[]>("getResumesByParams", params, {
+  const getResumesByParams = async (params: SearchParams) => {
+    const resumes = await handleGetResumesByParams(params, {
       onError: (error: Error) => {
         console.error("获取简历详情失败:", error);
         setError(error);
@@ -27,9 +27,7 @@ const HeaderContent: React.FC = () => {
 
     setLoading(true);
 
-    console.log(searchParams);
-
-    handleGetResumesByParams(searchParams)
+    getResumesByParams(searchParams)
       .then((data: Resume[]) => {
         console.log(data);
         setResumes(data);

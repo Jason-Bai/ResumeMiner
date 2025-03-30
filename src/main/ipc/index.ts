@@ -5,6 +5,7 @@ import {
   handleGetResumes,
   handleGetResume,
   handleGetResumesByParams,
+  handleGetResumesByParamsWithPagination,
 } from "./handlers/resume";
 
 // 处理获取版本请求
@@ -35,6 +36,10 @@ export function registerIPC() {
   ipcMain.handle(
     IPCMainChannels.GET_RESUMES_BY_PARAMS,
     handleGetResumesByParams
+  );
+  ipcMain.handle(
+    IPCMainChannels.GET_RESUMES_BY_PARAMS_WITH_PAGINATION,
+    handleGetResumesByParamsWithPagination
   );
 
   // 日志相关

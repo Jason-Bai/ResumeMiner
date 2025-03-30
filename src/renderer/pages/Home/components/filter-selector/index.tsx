@@ -23,12 +23,6 @@ const FilterSelector = ({
   style,
   mode,
 }: FilterSelectorProps) => {
-  const [searchValue, setSearchValue] = useState("");
-
-  const onSearch = (value: string) => {
-    setSearchValue(value);
-  };
-
   return (
     <div style={style}>
       <Select
@@ -50,7 +44,6 @@ const FilterSelector = ({
             .indexOf(input.toLowerCase()) !== -1
         }
         mode={mode}
-        onSearch={onSearch}
       />
     </div>
   );
