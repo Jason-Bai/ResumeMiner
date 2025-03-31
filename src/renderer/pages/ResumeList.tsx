@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { List, Card, Button, Space, Tag, Avatar } from "antd";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftOutlined, UserOutlined } from "@ant-design/icons";
-import type { Resume } from "../../main/database/entities/Resume";
+import { Resume } from "../types/resume";
 
 const ResumeList: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const ResumeList: React.FC = () => {
     window.electronAPI
       .getResumes()
       .then((data) => {
-        setResumes(data);
+        setResumes([]);
       })
       .finally(() => {
         setLoading(false);

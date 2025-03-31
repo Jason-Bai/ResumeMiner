@@ -1,8 +1,8 @@
 import { getRepository } from "../../database";
 import { Resume } from "../../database/entities/Resume";
 import { FindOptionsWhere, In, Like, Raw } from "typeorm";
-import { wrapIpcHandler } from "../utils/response";
-import { IpcResponse, PageParams } from "../types";
+import { wrapIpcHandler, wrapIpcPageHandler } from "../utils/response";
+import { IpcPageParams } from "../types";
 
 // 获取所有简历
 const getResumes = async () => {
@@ -72,7 +72,7 @@ export const handleGetResumesByParams = wrapIpcHandler(
 // 处理获取简历分页请求，根据条件查询
 const getResumesByParamsWithPagination = async (
   _: any,
-  pageParams: PageParams<Partial<Resume>>
+  pageParams: IpcPageParams<Partial<Resume>>
 ) => {
   const { Resume: resumeRepository } = getRepository();
 
@@ -119,18 +119,10 @@ const getResumesByParamsWithPagination = async (
     total,
     page,
     pageSize,
-    data: resumes,
+    list: resumes,
   };
 };
 
-export const handleGetResumesByParamsWithPagination = wrapIpcHandler(
-  getResumesByParamsWithPagination,
-  "获取简历列表成功",
-  "获取简历列表失败",
-  {
-    total: 0,
-    page: 1,
-    pageSize: 10,
-    data: [],
-  }
-);
+export const handleGetResumesByParamsWithPagination = wrapIpcPageHandler<
+  Resume[]
+>(getResumesByParamsWithPagination, "获取简历列表成功", "获取简历列表失败", []);

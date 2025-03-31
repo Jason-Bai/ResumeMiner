@@ -41,13 +41,6 @@ interface IpcSortParams {
   field: string;
   order: "asc" | "desc";
 }
-
-// 查询参数
-interface IpcQueryParams {
-  keyword?: string;
-  filters?: Record<string, any>;
-  sort?: IpcSortParams;
-}
 ```
 
 ## 通道类型定义
@@ -82,7 +75,7 @@ enum IpcChannel {
 ```typescript
 // 通道参数类型映射
 type IpcChannelParams = {
-  [IpcChannel.GET_RESUMES]: IpcQueryParams & IpcPageParams;
+  [IpcChannel.GET_RESUMES]: IpcPageParams;
   [IpcChannel.GET_RESUME]: { id: number };
   [IpcChannel.CREATE_RESUME]: Omit<Resume, "id">;
   [IpcChannel.UPDATE_RESUME]: Partial<Resume>;

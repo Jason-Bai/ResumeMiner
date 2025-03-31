@@ -3,21 +3,27 @@ import FilterSelector from "./filter-selector";
 import { useHomeContext } from "../HomeContext";
 
 const AdvancedSearch = () => {
-  const { setSearchBaseParams, searchBaseParams } = useHomeContext();
+  const { searchPageBaseParams, setSearchPageBaseParams } = useHomeContext();
 
   // 处理性别选择
   const handleGenderSelect = (selectedGender: string) => {
-    setSearchBaseParams({
-      ...searchBaseParams,
-      gender: selectedGender,
+    setSearchPageBaseParams({
+      ...searchPageBaseParams,
+      params: {
+        ...searchPageBaseParams.params,
+        gender: selectedGender,
+      },
     });
   };
 
   // 处理技能选择
   const handleSkillsSelect = (selectedSkills: string | string[]) => {
-    setSearchBaseParams({
-      ...searchBaseParams,
-      skills: selectedSkills as string[],
+    setSearchPageBaseParams({
+      ...searchPageBaseParams,
+      params: {
+        ...searchPageBaseParams.params,
+        skills: selectedSkills as string[],
+      },
     });
   };
 
@@ -45,7 +51,11 @@ const AdvancedSearch = () => {
               { label: "男", value: "男" },
               { label: "女", value: "女" },
             ]}
-            value={searchBaseParams.gender ? [searchBaseParams.gender] : []}
+            value={
+              searchPageBaseParams.params.gender
+                ? [searchPageBaseParams.params.gender]
+                : []
+            }
             onChange={(values) => handleGenderSelect(values as string)}
             style={{ flex: 2 }}
           />
@@ -66,7 +76,7 @@ const AdvancedSearch = () => {
               { label: "Vue", value: "Vue" },
               { label: "Node.js", value: "Node.js" },
             ]}
-            value={searchBaseParams.skills}
+            value={searchPageBaseParams.params.skills}
             onChange={handleSkillsSelect}
             mode="multiple"
             style={{ flex: 2 }}

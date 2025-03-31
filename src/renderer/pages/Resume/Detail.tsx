@@ -10,8 +10,8 @@ import {
   Alert,
 } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Resume } from "../../types/resume";
-import { Stage, useHomeContext } from "../Home/HomeContext";
+import { Stage, Resume } from "../../types/resume";
+import { useHomeContext } from "../Home/HomeContext";
 import { ipcInvoke } from "../../utils/ipc";
 
 const ResumeDetail: React.FC = () => {

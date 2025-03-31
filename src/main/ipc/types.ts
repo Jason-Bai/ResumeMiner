@@ -25,19 +25,25 @@ export interface IpcResponse<T> {
   message: string;
 }
 
+export interface IpcPageResponseData<T> {
+  list: T;
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
 // 分页响应类型
-export interface IpcPageResponse<T> extends IpcResponse<T> {
+export interface IpcPageResponse<T> {
+  success: boolean;
   data: {
     code: number;
-    data: T;
-    total: number;
-    page: number;
-    pageSize: number;
+    data: IpcPageResponseData<T>;
   };
+  message: string;
 }
 
 // 分页请求参数
-export interface IpcPageParams {
+export interface IpcPaginationParams {
   page: number;
   pageSize: number;
 }
@@ -48,14 +54,7 @@ export interface IpcSortParams {
   order: "asc" | "desc";
 }
 
-// 查询参数
-export interface IpcQueryParams {
-  keyword?: string;
-  filters?: Record<string, any>;
-  sort?: IpcSortParams;
-}
-
-export interface PageParams<T> extends IpcPageParams {
+export interface IpcPageParams<T> extends IpcPaginationParams {
   params: T;
   sort: IpcSortParams;
 }

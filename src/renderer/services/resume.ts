@@ -1,6 +1,6 @@
-import { SearchParams } from "../pages/Home/HomeContext";
-import { Resume } from "../types/resume";
-import { ipcInvoke, IpcCallOptions } from "../utils/ipc";
+import { PageParams } from "../types/response";
+import { SearchParams, Resume } from "../types/resume";
+import { ipcInvoke, IpcCallOptions, ipcPageInvoke } from "../utils/ipc";
 
 export const handleGetResumesByParams = async (
   params: SearchParams,
@@ -14,14 +14,14 @@ export const handleGetResumesByParams = async (
   return resumes;
 };
 
-export const handleGetResumesByParamsWithPagination = async (
-  params: SearchParams,
+export const handleResumesByParamsWithPagination = async (
+  pageParams: PageParams<Partial<Resume>>,
   options?: IpcCallOptions
 ) => {
-  const resumes = await ipcInvoke<Resume[]>(
+  const data = await ipcPageInvoke<Resume[]>(
     "getResumesByParamsWithPagination",
-    params,
+    pageParams,
     options
   );
-  return resumes;
+  return data;
 };

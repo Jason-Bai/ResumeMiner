@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { List, Card, Tag, Avatar } from "antd";
+import { List, Card, Tag, Avatar, Pagination } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { Resume } from "../../types/resume";
-import { SearchParams, Stage, useHomeContext } from "./HomeContext";
-import { handleGetResumesByParams } from "../../services/resume";
+import { Stage, Resume } from "../../types/resume";
+import { useHomeContext } from "./HomeContext";
+import { handleResumesByParamsWithPagination } from "../../services/resume";
+import { PageParams, PageResponseData } from "../../types/response";
 
 const HeaderContent: React.FC = () => {
-  const [resumes, setResumes] = useState<Resume[]>([]);
   const [loading, setLoading] = useState(false);
-  const { setResumeId, setStage, searchParams } = useHomeContext();
+  const {
+    setResumeId,
+    setStage,
+    searchPageParams,
+    resumePageData,
+    setResumePageData,
+    setSearchPageParams,
+  } = useHomeContext();
   const [error, setError] = useState<Error | null>(null);
 
-  const getResumesByParams = async (params: SearchParams) => {
-    const resumes = await handleGetResumesByParams(params, {
+  const getResumesByPageParams = async (
+    pageParams: PageParams<Partial<Resume>>
+  ) => {
+    const data = await handleResumesByParamsWithPagination(pageParams, {
       onError: (error: Error) => {
         console.error("获取简历详情失败:", error);
         setError(error);
         throw error;
       },
     });
-    return resumes;
+    return data;
   };
 
   useEffect(() => {
@@ -27,15 +36,14 @@ const HeaderContent: React.FC = () => {
 
     setLoading(true);
 
-    getResumesByParams(searchParams)
-      .then((data: Resume[]) => {
-        console.log(data);
-        setResumes(data);
+    getResumesByPageParams(searchPageParams)
+      .then((data: PageResponseData<Resume[]>) => {
+        setResumePageData(data);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [searchParams]);
+  }, [searchPageParams]);
 
   const getHighestEducation = (education: Resume["education"]) => {
     if (!education || education.length === 0) return "-";
@@ -43,6 +51,8 @@ const HeaderContent: React.FC = () => {
 
     return `${highestEdu.school} | ${highestEdu.major} | ${highestEdu.degree}`;
   };
+
+  console.log(resumePageData);
 
   return (
     <div>
@@ -57,7 +67,7 @@ const HeaderContent: React.FC = () => {
           xl: 4,
           xxl: 4,
         }}
-        dataSource={resumes}
+        dataSource={resumePageData.list}
         loading={loading}
         renderItem={(resume) => (
           <List.Item>
@@ -131,6 +141,22 @@ const HeaderContent: React.FC = () => {
           </List.Item>
         )}
       />
+      {/* 新增分页,位置在列表下方且居右 */}
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Pagination
+          current={resumePageData.page}
+          total={resumePageData.total}
+          pageSize={resumePageData.pageSize}
+          onChange={(page, pageSize) => {
+            // 更新搜索页参数
+            setSearchPageParams({
+              ...searchPageParams,
+              page,
+              pageSize,
+            });
+          }}
+        />
+      </div>
     </div>
   );
 };

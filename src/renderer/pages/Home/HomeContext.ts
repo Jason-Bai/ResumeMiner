@@ -1,29 +1,28 @@
 // 创建一个HomeContext
+import { PageResponseData } from "@/renderer/types/response";
+import {
+  Resume,
+  SearchPageParams,
+  SearchParams,
+  Stage,
+} from "@/renderer/types/resume";
 import { createContext, useContext, Dispatch, SetStateAction } from "react";
-
-export enum Stage {
-  Search = "search",
-  Show_Result = "show_result",
-  Show_Resume_Detail = "show_resume_detail",
-}
-
-export interface SearchParams {
-  name: string;
-  gender: string;
-  skills: string[];
-}
 
 interface HomeContextType {
   stage: Stage;
   setStage: Dispatch<SetStateAction<Stage>>;
   resumeId: number | null;
   setResumeId: Dispatch<SetStateAction<number | null>>;
-  searchBaseParams: SearchParams;
-  setSearchBaseParams: Dispatch<SetStateAction<SearchParams>>;
-  searchParams: SearchParams;
-  setSearchParams: Dispatch<SetStateAction<SearchParams>>;
   showAdvancedSearch: boolean;
   setShowAdvancedSearch: Dispatch<SetStateAction<boolean>>;
+  searchPageBaseParams: SearchPageParams<SearchParams>;
+  setSearchPageBaseParams: Dispatch<
+    SetStateAction<SearchPageParams<SearchParams>>
+  >;
+  searchPageParams: SearchPageParams<SearchParams>;
+  setSearchPageParams: Dispatch<SetStateAction<SearchPageParams<SearchParams>>>;
+  resumePageData: PageResponseData<Resume[]>;
+  setResumePageData: Dispatch<SetStateAction<PageResponseData<Resume[]>>>;
 }
 
 export const HomeContext = createContext<HomeContextType>({
@@ -31,22 +30,44 @@ export const HomeContext = createContext<HomeContextType>({
   setStage: () => undefined,
   resumeId: null,
   setResumeId: () => undefined,
-  searchBaseParams: {
-    name: "",
-    gender: "",
-    skills: [],
-  },
-  setSearchBaseParams: () => undefined,
-  searchParams: {
-    name: "",
-    gender: "",
-    skills: [],
-  },
-  setSearchParams: () => undefined,
   showAdvancedSearch: false,
   setShowAdvancedSearch: () => undefined,
+  searchPageBaseParams: {
+    params: {
+      name: "",
+      gender: "",
+      skills: [],
+    },
+    sort: {
+      field: "updatedAt",
+      order: "desc",
+    },
+    page: 1,
+    pageSize: 10,
+  },
+  setSearchPageBaseParams: () => undefined,
+  searchPageParams: {
+    params: {
+      name: "",
+      gender: "",
+      skills: [],
+    },
+    sort: {
+      field: "updatedAt",
+      order: "desc",
+    },
+    page: 1,
+    pageSize: 10,
+  },
+  setSearchPageParams: () => undefined,
+  resumePageData: {
+    list: [],
+    total: 0,
+    page: 1,
+    pageSize: 10,
+  },
+  setResumePageData: () => undefined,
 });
-
 // 添加mode到homeContext
 export const useHomeContext = () => {
   return useContext(HomeContext);

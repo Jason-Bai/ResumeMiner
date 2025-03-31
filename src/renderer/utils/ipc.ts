@@ -1,4 +1,4 @@
-import { IpcResponse } from "../../main/ipc/types";
+import { Response, PageResponseData } from "../types/response";
 export interface IpcCallOptions {
   timeout?: number;
   onError?: (error: Error) => void;
@@ -19,7 +19,7 @@ export async function ipcCall<T>(
   try {
     const response = (await (
       window.electronAPI[channel as keyof typeof window.electronAPI] as any
-    )(data)) as IpcResponse<T>;
+    )(data)) as Response<T>;
     if (!response.success) {
       throw new Error(response.message);
     }
@@ -44,4 +44,46 @@ export async function ipcInvoke<T>(
   options?: IpcCallOptions
 ): Promise<T> {
   return ipcCall<T>(channel, data, options);
+}
+
+/**
+ * 统一的 IPC 调用方法
+ * @param channel IPC 通道名称
+ * @param data 请求参数
+ * @param options 调用选项
+ * @returns Promise<T> 响应数据
+ */
+export async function ipcPageCall<T>(
+  channel: string,
+  data?: any,
+  options: IpcCallOptions = {}
+): Promise<PageResponseData<T>> {
+  try {
+    const response = await (
+      window.electronAPI[channel as keyof typeof window.electronAPI] as any
+    )(data);
+    if (!response.success) {
+      throw new Error(response.message);
+    }
+    return response.data.data;
+  } catch (error) {
+    if (options.onError) {
+      options.onError(error as Error);
+    }
+    throw error;
+  }
+}
+
+/**
+ * 带类型提示的 IPC 调用方法
+ * @example
+ * const version = await ipcInvoke<string>('getAppVersion');
+ * const resumes = await ipcInvoke<Resume[]>('getResumes');
+ */
+export async function ipcPageInvoke<T>(
+  channel: string,
+  data?: any,
+  options?: IpcCallOptions
+): Promise<PageResponseData<T>> {
+  return ipcPageCall<T>(channel, data, options);
 }

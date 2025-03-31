@@ -1,27 +1,60 @@
 import React, { useEffect, useState } from "react";
 import HomeHeader from "./HomeHeader";
-import { Stage, HomeContext, SearchParams } from "./HomeContext";
+import { HomeContext } from "./HomeContext";
 import HomeContent from "./HomeContent";
 import ResumeDetail from "../Resume/Detail";
 import { ipcInvoke } from "../../utils/ipc";
-import { Resume } from "../../types/resume";
+import {
+  Stage,
+  SearchParams,
+  SearchPageParams,
+  Resume,
+} from "../../types/resume";
+import { PageResponseData } from "@/renderer/types/response";
 
 const Home: React.FC = () => {
   const [version, setVersion] = useState<string>("");
   const [stage, setStage] = useState<Stage>(Stage.Search);
   const [resumeId, setResumeId] = useState<number | null>(null);
-  const [searchBaseParams, setSearchBaseParams] = useState<SearchParams>({
-    name: "",
-    gender: "",
-    skills: [],
-  });
-  const [searchParams, setSearchParams] = useState<SearchParams>({
-    name: "",
-    gender: "",
-    skills: [],
-  });
   const [showAdvancedSearch, setShowAdvancedSearch] = useState<boolean>(false);
-
+  const [searchPageBaseParams, setSearchPageBaseParams] = useState<
+    SearchPageParams<SearchParams>
+  >({
+    params: {
+      name: "",
+      gender: "",
+      skills: [],
+    },
+    sort: {
+      field: "updatedAt",
+      order: "desc",
+    },
+    page: 1,
+    pageSize: 10,
+  });
+  const [searchPageParams, setSearchPageParams] = useState<
+    SearchPageParams<SearchParams>
+  >({
+    params: {
+      name: "",
+      gender: "",
+      skills: [],
+    },
+    sort: {
+      field: "updatedAt",
+      order: "desc",
+    },
+    page: 1,
+    pageSize: 10,
+  });
+  const [resumePageData, setResumePageData] = useState<
+    PageResponseData<Resume[]>
+  >({
+    list: [],
+    total: 0,
+    page: 1,
+    pageSize: 10,
+  });
   useEffect(() => {
     ipcInvoke<string>("getAppVersion")
       .then((version) => {
@@ -39,12 +72,14 @@ const Home: React.FC = () => {
         setStage,
         resumeId,
         setResumeId,
-        searchBaseParams,
-        setSearchBaseParams,
-        searchParams,
-        setSearchParams,
         showAdvancedSearch,
         setShowAdvancedSearch,
+        searchPageBaseParams,
+        setSearchPageBaseParams,
+        searchPageParams,
+        setSearchPageParams,
+        resumePageData,
+        setResumePageData,
       }}
     >
       <div>

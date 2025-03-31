@@ -1,4 +1,4 @@
-import type { Resume } from "../../main/database/entities/Resume";
+import type { Resume } from "../types/resume";
 
 interface ElectronAPI {
   getAppVersion: () => Promise<string>;

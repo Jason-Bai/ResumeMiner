@@ -2,7 +2,11 @@
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 // src/main/preload.ts
 import { contextBridge, ipcRenderer } from "electron";
-import { IPCMainChannels, IPCRendererChannels } from "./ipc/types";
+import {
+  IPCMainChannels,
+  IPCRendererChannels,
+  IpcPageParams,
+} from "./ipc/types";
 import type { Resume } from "./database/entities/Resume";
 
 // 添加日志帮助调试
@@ -22,6 +26,13 @@ contextBridge.exposeInMainWorld("electronAPI", {
   refreshSkills: () => ipcRenderer.invoke(IPCMainChannels.REFRESH_SKILLS),
   getResumesByParams: (params: Partial<Resume>) =>
     ipcRenderer.invoke(IPCMainChannels.GET_RESUMES_BY_PARAMS, params),
+  getResumesByParamsWithPagination: (
+    pageParams: IpcPageParams<Partial<Resume>>
+  ) =>
+    ipcRenderer.invoke(
+      IPCMainChannels.GET_RESUMES_BY_PARAMS_WITH_PAGINATION,
+      pageParams
+    ),
 
   // 渲染进程主动发送
   sendLog: (message: string) =>

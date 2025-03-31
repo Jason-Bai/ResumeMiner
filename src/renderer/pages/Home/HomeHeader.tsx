@@ -2,7 +2,8 @@ import React from "react";
 import { Card, Input, Space, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import ResumeMinerLogo from "@/renderer/assets/images/resume-miner.png";
-import { Stage, useHomeContext } from "./HomeContext";
+import { useHomeContext } from "./HomeContext";
+import { SearchParams, Stage, SearchPageParams } from "@/renderer/types/resume";
 import AdvancedSearch from "./components/AdvancedSearch";
 
 const { Search } = Input;
@@ -11,17 +12,21 @@ const HomeHeader: React.FC = () => {
   const {
     stage,
     setStage,
-    setSearchParams,
-    searchBaseParams,
-    setSearchBaseParams,
     showAdvancedSearch,
     setShowAdvancedSearch,
+    searchPageBaseParams,
+    setSearchPageBaseParams,
+    setSearchPageParams,
   } = useHomeContext();
 
   const handleSearchClick = () => {
-    if (!searchBaseParams.name || !searchBaseParams.name.length) return;
-    setSearchParams({
-      ...searchBaseParams,
+    if (
+      !searchPageBaseParams.params ||
+      !searchPageBaseParams.params.name.length
+    )
+      return;
+    setSearchPageParams({
+      ...searchPageBaseParams,
     });
     setStage(Stage.Show_Result);
   };
@@ -65,27 +70,41 @@ const HomeHeader: React.FC = () => {
               <h3 style={{ margin: 0 }}>搜索</h3>
             </div>
             <Search
-              value={searchBaseParams.name}
+              value={searchPageBaseParams.params.name}
               placeholder="输入关键词搜索简历"
               allowClear
               enterButton={<SearchOutlined />}
               size="large"
               onSearch={handleSearchClick} // 点击搜索时也隐藏图标
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setSearchBaseParams({
-                  ...searchBaseParams,
-                  name: e.target.value,
-                });
+                const newSearchPageParams = {
+                  ...searchPageBaseParams,
+                  params: {
+                    ...searchPageBaseParams.params,
+                    name: e.target.value,
+                  },
+                };
+
+                setSearchPageBaseParams(newSearchPageParams);
 
                 // 用户清空搜索框，则重置搜索条件
                 if (!e.target.value.length) {
-                  const resetSearchParams = {
-                    name: "",
-                    gender: "",
-                    skills: [],
-                  };
-                  setSearchBaseParams(resetSearchParams);
-                  setSearchParams(resetSearchParams);
+                  const resetSearchPageParams: SearchPageParams<SearchParams> =
+                    {
+                      params: {
+                        name: "",
+                        gender: "",
+                        skills: [],
+                      },
+                      sort: {
+                        field: "updatedAt",
+                        order: "desc" as const,
+                      },
+                      page: 1,
+                      pageSize: 10,
+                    };
+                  setSearchPageBaseParams(resetSearchPageParams);
+                  setSearchPageParams(resetSearchPageParams);
                 }
               }}
             />
