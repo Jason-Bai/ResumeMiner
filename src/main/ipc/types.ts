@@ -9,6 +9,14 @@ export enum IPCMainChannels {
   UPDATE_RESUME = "update-resume",
   DELETE_RESUME = "delete-resume",
   REFRESH_SKILLS = "refresh-skills",
+  GET_KEYS = "get-keys",
+  SAVE_KEY = "save-key",
+  UPDATE_KEY = "update-key",
+  DELETE_KEY = "delete-key",
+  GET_PROMPTS = "get-prompts",
+  SAVE_PROMPT = "save-prompt",
+  UPDATE_PROMPT = "update-prompt",
+  DELETE_PROMPT = "delete-prompt",
 }
 
 export enum IPCRendererChannels {

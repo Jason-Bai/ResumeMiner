@@ -1,7 +1,8 @@
-import { HomeOutlined, FileOutlined } from "@ant-design/icons";
+import { HomeOutlined, SettingOutlined } from "@ant-design/icons";
 import Home from "../pages/Home";
-import ResumeList from "../pages/ResumeList";
-import ResumeDetail from "../pages/Resume/Detail";
+import Settings from "../pages/Settings";
+import KeyList from "../pages/Settings/Key/KeyList";
+import PromptList from "../pages/Settings/Prompt/PromptList";
 import NotFound from "../pages/NotFound";
 
 export interface RouteConfig {
@@ -39,6 +40,24 @@ export const routes: RouteConfig[] = [
   //     },
   //   ],
   // },
+  {
+    path: "/settings",
+    name: "配置管理",
+    icon: SettingOutlined,
+    component: Settings,
+    children: [
+      {
+        path: "/settings/keys",
+        name: "Key列表",
+        component: KeyList,
+      },
+      {
+        path: "/settings/prompts",
+        name: "Prompt列表",
+        component: PromptList,
+      },
+    ],
+  },
   {
     path: "*",
     name: "404",

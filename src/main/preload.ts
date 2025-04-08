@@ -8,6 +8,8 @@ import {
   IpcPageParams,
 } from "./ipc/types";
 import type { Resume } from "./database/entities/Resume";
+import { Key } from "./database/entities/Key";
+import { Prompt } from "./database/entities/Prompt";
 
 // 添加日志帮助调试
 contextBridge.exposeInMainWorld("electronAPI", {
@@ -33,6 +35,21 @@ contextBridge.exposeInMainWorld("electronAPI", {
       IPCMainChannels.GET_RESUMES_BY_PARAMS_WITH_PAGINATION,
       pageParams
     ),
+
+  // 密钥相关操作
+  getKeys: () => ipcRenderer.invoke(IPCMainChannels.GET_KEYS),
+  saveKey: (key: Partial<Key>) =>
+    ipcRenderer.invoke(IPCMainChannels.SAVE_KEY, key),
+  updateKey: (id: string, key: Partial<Key>) =>
+    ipcRenderer.invoke(IPCMainChannels.UPDATE_KEY, id, key),
+  deleteKey: (id: string) => ipcRenderer.invoke(IPCMainChannels.DELETE_KEY, id),
+
+  // 提示词相关
+  getPrompts: () => ipcRenderer.invoke(IPCMainChannels.GET_PROMPTS),
+  savePrompt: (prompt: Partial<Prompt>) =>
+    ipcRenderer.invoke(IPCMainChannels.SAVE_PROMPT, prompt),
+  updatePrompt: (id: string, prompt: Partial<Prompt>) =>
+    ipcRenderer.invoke(IPCMainChannels.UPDATE_PROMPT, id, prompt),
 
   // 渲染进程主动发送
   sendLog: (message: string) =>

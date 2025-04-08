@@ -52,8 +52,6 @@ const HeaderContent: React.FC = () => {
     return `${highestEdu.school} | ${highestEdu.major} | ${highestEdu.degree}`;
   };
 
-  console.log(resumePageData);
-
   return (
     <div>
       {error && <div>获取简历失败: {error.message}</div>}

@@ -1,5 +1,5 @@
 import type { Resume } from "../main/database/entities/Resume";
-
+import type { Key } from "../main/database/entities/Key";
 declare global {
   interface Window {
     electronAPI: {
@@ -12,6 +12,10 @@ declare global {
         resume: Partial<Resume>
       ) => Promise<Resume | null>;
       deleteResume: (id: number) => Promise<boolean>;
+      getKeys: () => Promise<Key[]>;
+      saveKey: (key: Partial<Key>) => Promise<Key>;
+      updateKey: (id: string, key: Partial<Key>) => Promise<Key | null>;
+      deleteKey: (id: string) => Promise<boolean>;
     };
   }
 }

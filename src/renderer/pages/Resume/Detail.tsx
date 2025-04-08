@@ -17,8 +17,6 @@ import { ipcInvoke } from "../../utils/ipc";
 const ResumeDetail: React.FC = () => {
   const { resumeId, setStage } = useHomeContext();
 
-  console.log(resumeId);
-
   const [resume, setResume] = useState<Resume | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);

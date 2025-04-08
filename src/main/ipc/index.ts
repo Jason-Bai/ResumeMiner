@@ -7,7 +7,18 @@ import {
   handleGetResumesByParams,
   handleGetResumesByParamsWithPagination,
 } from "./handlers/resume";
-
+import {
+  handleGetKeys,
+  handleSaveKey,
+  handleUpdateKey,
+  handleDeleteKey,
+} from "./handlers/key";
+import {
+  handleGetPrompts,
+  handleSavePrompt,
+  handleUpdatePrompt,
+  handleDeletePrompt,
+} from "./handlers/prompt";
 // 处理获取版本请求
 const getAppVersion = async () => {
   return await app.getVersion();
@@ -41,6 +52,18 @@ export function registerIPC() {
     IPCMainChannels.GET_RESUMES_BY_PARAMS_WITH_PAGINATION,
     handleGetResumesByParamsWithPagination
   );
+
+  // 密钥相关
+  ipcMain.handle(IPCMainChannels.GET_KEYS, handleGetKeys);
+  ipcMain.handle(IPCMainChannels.SAVE_KEY, handleSaveKey);
+  ipcMain.handle(IPCMainChannels.UPDATE_KEY, handleUpdateKey);
+  ipcMain.handle(IPCMainChannels.DELETE_KEY, handleDeleteKey);
+
+  // 提示词相关
+  ipcMain.handle(IPCMainChannels.GET_PROMPTS, handleGetPrompts);
+  ipcMain.handle(IPCMainChannels.SAVE_PROMPT, handleSavePrompt);
+  ipcMain.handle(IPCMainChannels.UPDATE_PROMPT, handleUpdatePrompt);
+  ipcMain.handle(IPCMainChannels.DELETE_PROMPT, handleDeletePrompt);
 
   // 日志相关
   ipcMain.on(IPCRendererChannels.LOG_EVENT, handleLogEvent);
